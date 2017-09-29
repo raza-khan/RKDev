@@ -1,0 +1,24 @@
+<aura:component>
+	<aura:attribute name="cItem" type="Camping_Item__c" />
+	<lightning:card title="{!v.cItem.Name}" iconName="action:goal"
+		class="{!v.cItem.Packed__c ?
+                           'slds-theme--success' : ''}">
+
+		<p class="slds-text-heading--medium slds-p-horizontal--small">
+			Quantity:
+			<lightning:formattedNumber value="{!v.cItem.Quantity__c}" />
+		</p>
+		<p class="slds-p-horizontal--small">
+			Price:
+			<lightning:formattedNumber value="{!v.cItem.Price__c}"
+				style="currency" />
+		</p>
+		<p>
+			<lightning:input type="toggle" label="Packed?" name="packed"
+				class="slds-p-around--small" checked="{!v.cItem.Packed__c}"
+				messageToggleActive="Yes" messageToggleInactive="No" />
+			<!--onchange="{!c.clickReimbursed}"-->
+		</p>
+	</lightning:card>
+
+</aura:component>

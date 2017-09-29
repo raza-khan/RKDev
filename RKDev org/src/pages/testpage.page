@@ -1,0 +1,32 @@
+<apex:page>
+	<apex:remoteObjects jsNamespace="RemoteObjectModel">
+		<apex:remoteObjectModel name="User" jsShorthand="userRec"
+			fields="Id,LanguageLocaleKey">
+		</apex:remoteObjectModel>
+	</apex:remoteObjects>
+
+	<input type="button" onclick="fetchUsers();" value="MyButton" />
+
+	<script>
+    var fetchUsers = function(){
+        // Create a new Remote Object
+        var ur = new RemoteObjectModel.userRec();
+        var userID = '{!$user.id}';
+        // Use the Remote Object to query for 10 warehouse records
+        ur.retrieve({where: {Id: {eq:userID}}, limit: 10 }, function(err, records, event){
+            if(err) {
+                alert(err.message);
+            }
+            else {
+                console.log(records[0].get('LanguageLocaleKey'));
+            }
+        });
+    };
+    fetchUsers();
+</script>
+	<h1>Congratulations</h1>
+   This is your new Apex Page
+   <p>The current company name for this user is:
+		{!$User.CompanyName}</p>
+	<p>Is the user active? {!$User.isActive}</p>
+</apex:page>

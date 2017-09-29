@@ -1,0 +1,60 @@
+<aura:component>
+	<aura:attribute name="items" type="Camping_Item__c[]" />
+	<aura:attribute name="newItem" type="Camping_Item__c"
+		default="{'sobjectType': 'Camping_Item__c','Name':'', 'Price__c':0,'Quantity__c':0,'Packed__c':false}" />
+	<!-- PAGE HEADER -->
+	<lightning:layout
+		class="slds-page-header slds-page-header--object-home">
+		<lightning:layoutItem>
+			<lightning:icon iconName="action:goal"
+				alternativeText="My Cmping List" />
+		</lightning:layoutItem>
+		<lightning:layoutItem padding="horizontal-small">
+			<div class="page-section page-header">
+				<h1 class="slds-text-heading--label">My Cmping List</h1>
+				<h2 class="slds-text-heading--medium">My Cmping List</h2>
+			</div>
+		</lightning:layoutItem>
+	</lightning:layout>
+	<!-- / PAGE HEADER -->
+	<lightning:layout>
+		<lightning:layoutItem padding="around-small" size="6">
+
+			<!-- CREATE NEW EXPENSE -->
+			<div aria-labelledby="newexpenseform">
+
+				<!-- BOXED AREA -->
+				<fieldset class="slds-box slds-theme--default slds-container--small">
+
+					<legend id="newexpenseform"
+						class="slds-text-heading--small 
+      slds-p-vertical--medium">
+						Add Camping Item </legend>
+
+					<!-- CREATE NEW EXPENSE FORM -->
+					<form class="slds-form--stacked">
+						<lightning:input aura:id="campinglistform" label="Name"
+							name="name" value="{!v.newItem.Name}" />
+						<lightning:input type="number" aura:id="campinglistform"
+							label="Price" name="price" formatter="currency"
+							value="{!v.newItem.Price__c}" />
+						<lightning:input type="number" aura:id="campinglistform"
+							label="Quantity" name="quantity" value="{!v.newItem.Quantity__c}"
+							min="1" messageWhenRangeUnderflow="Quantity must atleast be 1." />
+
+						<lightning:input type="checkbox" aura:id="campinglistform"
+							label="Packed?" name="packed" checked="{!v.newItem.Packed__c}" />
+						<lightning:button label="Create Item" class="slds-m-top--medium"
+							variant="brand" onclick="{!c.clickCreateItem }" />
+					</form>
+					<!-- / CREATE NEW EXPENSE FORM -->
+
+				</fieldset>
+				<!-- / BOXED AREA -->
+
+			</div>
+			<!-- / CREATE NEW EXPENSE -->
+		</lightning:layoutItem>
+	</lightning:layout>
+	<c:campingList items="{!v.items}" />
+</aura:component>

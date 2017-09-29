@@ -1,0 +1,4 @@
+<aura:component>
+	<h1 class="heading">This is the Heaader</h1>
+	<p class="para">The text goes here</p>
+</aura:component>
